@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variables</title>
+</head>
+<body>
+<!--
+1. What are variables and how many ways can we declare variables in Javascript?
+   
+Variables: Variables are storage containers used for storing data.
+    ~ We can declare variables in three ways by using the below keywords
+                1.var
+                2.let
+                3.const
+--> 
+
+<!--
+
+2.Difference between Var , Let , Const with examples?
+
+var: 1.The var can be re-declared and re-initialized.
+     2. The var has global scope.
+
+let: 1.The let can't be re-declared but can be re-initialized.
+     2. The let has local/block level scope.
+
+const: 1.The const can't be re-declared and re-initialized.
+       2. The const has local/block level scope.
+
+-->
+
+<script>
+    //var
+
+    var name="Ramu";
+    console.log(name); //output:Ramu
+    //re-declaration
+    var name="Sita"
+    console.log(name); //output:Sita
+    //re-initialization
+    name="Raju";
+    console.log(name); //output:Raju
+
+    //let
+    
+    let age=21;
+    console.log(age); //output:21
+    //re-initialization
+    age=22;
+    console.log(age); //output:22
+    //re-declaration
+         // let age=20;
+         // console.log(age); //Syntax Error
+    
+    //const
+     
+    const id=2;
+    console.log(id); //output:2
+
+    //re-initialization
+         //id=22; 
+         //console.log(id); //type error
+    //re-declaration
+         //const id=20;
+         // console.log(age); //Syntax Error
+</script>
+
+<!--
+
+3.Explain the scope of variables and their usage?
+
+Scope: It refers to the visibility and accessibility of variables, functions, and objects 
+within different parts of your code and determines where a variable can be accessed and 
+where it can't be accessed.
+Usage of scope:
+    ~ Limiting variable access.
+    ~ Avoiding naming conflicts between variables.
+    ~ Promotes code reusability and maintainability.
+    ~ Memory management.
+
+-->
+
+<!--
+
+4.Explain the difference between “block level scope and global scope” ?  
+Block level scope:
+
+~ Block-level scope refers to the visibility and accessibility of variables within a specific block of code.
+~ Variables declared with let and const have block-level scope.
+~ A block can be a function, a loop, or any other code enclosed in curly braces {}.
+~ Variables declared inside a block are only accessible within that block and any nested blocks.
+
+Global scope:
+
+~ Variables declared outside any function or loop become global.
+~ They are accessible from anywhere in your code.
+~ Global variables allow sharing data across different parts of your program.
+
+-->
+<script>
+
+    // Global scope
+    let t = 10; 
+
+if (true) {
+
+    // Block scope
+     let s = 20; 
+    console.log(s); // output 20
+    console.log(t); // output 10
+}
+console.log(t); // output 10
+console.log(s); // output reference error
+
+</script>
+
+<!--5.What is hoisting and explain variable hoisting in detail?
+
+~ Hoisting is JavaScript's default behavior of moving all declarations to the top of the current scope.
+~ A variable can be declared after it has been used. n other words; a variable can be used before it has been declared.
+~ JavaScript only hoists declarations, not initializations.
+
+-->
+
+<script>
+    x=5;
+    console.log(x); // output 5
+    var y=10;
+    console.log(y); // output 10
+    var x;
+    console.log(x); // output 5
+</script>
+
+<!-- 6. What will be the output of the following code, and why?-->  
+<script>
+console.log(x); // output: undefined. Before using the output statement to print the variable "x" we haven't defined the variable. So the output is undefined. 
+var x = 5;
+console.log(x); // output: 5, We have defined a variable named "x" and assigned value for it, and then printed the variable. So the output will be the value of x, i.e. 5.
+x = 10;
+console.log(x); // output: 10, The variable x is re-initialized with the value 10. So when we try to print the value of x the re-initialized value will be printed.
+</script>
+
+<!-- 7.What will be the output of the following code, and why?-->
+
+<script>
+//console.log(a); // ReferenceError as we haven't defined the variable we cannot access it so the output gives us error.
+let a = 3;
+console.log(a); // Output:3
+</script>
+
+<!-- Because of hoisting behaviour the output of var will be undefined and output of let will be reference error when we try to print the output before defining it-->
+
+<!-- 8. Explain the term "temporal dead zone" (TDZ).
+
+~ The temporal dead zone is a concept related to the hoisting of the variables and the visibility of variables declared with let and const.
+~ In the TDZ, a variable exists but it cannot be accessed until it is not declared.
+~ This prevents the variable from being used or accessed before a value is assigned to it.
+
+-->
+
+<script>
+console.log(a);
+a=12;
+//let a; 
+//output:SyntaxError: Identifier 'a' has already been declared.
+</script>
+
+<!-- 9. How does variable shadowing work in JavaScript?
+   
+   ~ When a variable is declared in a certain scope having the same name defined on its outer scope and when we call the variable from the inner scope.
+   ~ The value assigned to the variable in the inner scope is the value that will be stored in the variable in the memory space  is known as Shadowing or Variable Shadowing.
+   ~ let and const in ECMAScript 6 along with block scoping allows variable shadowing.
+
+-->
+<script>
+    function func() {
+    let a = 5;
+    
+    if (true) {
+        let a = 10;  
+        console.log(a); 
+    }
+    
+    console.log(a); 
+}
+func();
+
+</script>
+
+<!--10.What will be the output of the following code and why?-->
+
+<script>
+var x = 1;
+if (function f() {}) {
+x += typeof f;
+}
+console.log(x);
+</script>
+
+<!--11.What will be the output of the following code and why?-->
+
+<script>
+ for (var i = 0; i < 3; i++) 
+ {
+setTimeout(() => console.log(i), 1000); 
+}
+// Output: 3
+// The output will be 3 because the loop will be executed till the i value is less than 3. 
+// The i value will increment every time the loop executes.
+// The i value will be incremented at the values 0,1,2.
+// and the loop will be terminated when the i value becomes 3 as it is not less than 3.
+</script>
+
+<!--12. Can you explain what happens when a const variable is declared but not initialised?
+
+~ We can't declare the const without initializing the variable value.
+~ If we declare the const value without initializing the variable value we get a syntax error as  Missing initializer in const declaration.
+
+-->
